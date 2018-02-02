@@ -22,24 +22,13 @@ defmodule Tokenize do
     IO.inspect(some_path)
     file_contents = File.read!(some_path)
 
-    file_contents |> tokenize
+    file_contents
+    |> rust_tokenize
+    |> elem(1)
+    |> Enum.map(fn(s) -> String.trim(s) end )
+    |> Enum.uniq
     |> Enum.sort
     |> IO.inspect
-  end
-
-  # from https://github.com/nicbet/essence/blob/master/lib/essence/tokenizer.ex
-  def tokenize(text) do
-   text
-   |> String.split(~r/\s+/u)
-   |> Enum.reduce([], fn(x, acc) -> acc ++ split_without_punctuation(x) end)
-  end
-
-  def split_without_punctuation(text) do
-    if String.ends_with?(text, "'s'") do
-      [text]
-    else
-      text |> String.split(~r/\pP/u, trim: true)
-    end
   end
 
 end
