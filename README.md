@@ -1,21 +1,10 @@
 # Tokenize
 
-**TODO: Add description**
+Convert english sentences into lists of tokens.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `tokenize` to your list of dependencies in `mix.exs`:
+ Make sure you have [rust
+ installed](https://www.rust-lang.org/en-US/install.html).
 
-```elixir
-def deps do
-  [
-    {:tokenize, "~> 0.1.0"}
-  ]
-end
-```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/tokenize](https://hexdocs.pm/tokenize).
-
+Run `mix compile` and invoke the `tokenize` or `rust_tokenize` function.

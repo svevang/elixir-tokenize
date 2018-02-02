@@ -4,7 +4,6 @@ defmodule Tokenize do
   """
 
   @doc """
-
   ## Examples
 
       iex> Tokenize.tokenize("some list of words")
@@ -14,6 +13,11 @@ defmodule Tokenize do
       ["some", "list", "of", "words"]
 
   """
+  use Rustler, otp_app: :tokenize, crate: :tokenize
+
+  # When your NIF is loaded, it will override this function.
+  def rust_tokenize(_a), do: throw :nif_not_loaded
+
   def tokenize_file(path: some_path) do
     IO.inspect(some_path)
     file_contents = File.read!(some_path)
