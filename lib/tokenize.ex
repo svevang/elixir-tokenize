@@ -3,21 +3,25 @@ defmodule Tokenize do
   Parse english into a series of tokens.
   """
 
-  @doc """
-  ## Examples
-
-      iex> Tokenize.tokenize("some list of words")
-      ["some", "list", "of", "words"]
-
-      iex> Tokenize.tokenize("some list of words")
-      ["some", "list", "of", "words"]
-
-  """
   use Rustler, otp_app: :tokenize, crate: :tokenize
 
+  @doc """
+  ## Example
+
+      iex> Tokenize.rust_tokenize("some list of words")
+      { :ok, ["some", "list", "of", "words"] }
+
+  """
   # When your NIF is loaded, it will override this function.
   def rust_tokenize(_a), do: throw :nif_not_loaded
 
+  @doc """
+  ## Example
+
+      iex> Tokenize.tokenize_file(path: Path.expand('../test/fixtures/test.txt', __DIR__))
+      ["file", "from", "list", "of", "some", "words"]
+
+  """
   def tokenize_file(path: some_path) do
     IO.inspect(some_path)
     file_contents = File.read!(some_path)
@@ -28,7 +32,6 @@ defmodule Tokenize do
     |> Enum.map(fn(s) -> String.trim(s) end )
     |> Enum.uniq
     |> Enum.sort
-    |> IO.inspect
   end
 
 end
