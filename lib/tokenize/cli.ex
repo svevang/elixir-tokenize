@@ -26,8 +26,8 @@ defmodule Tokenize.CLI do
     """
   end
 
-  def process({some_path}) do
-    IO.puts(some_path)
+  def process([path: some_path]) do
+    Enum.each(Tokenize.tokenize_file([path: some_path]), fn(s)-> IO.inspect(s) end)
   end
 
   def parse_args(argv) do
@@ -37,8 +37,8 @@ defmodule Tokenize.CLI do
     case parse do
       {[help: true], _,  _ }
         -> :help
-      {_, [ file_path ], _}
-        -> { file_path }
+      {[path: file_path ], _, _}
+        -> [ path: file_path ]
       _
         -> :help
     end

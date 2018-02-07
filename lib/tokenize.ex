@@ -2,7 +2,6 @@ defmodule Tokenize do
   @moduledoc """
   Parse english into a series of tokens.
   """
-
   use Rustler, otp_app: :tokenize, crate: :tokenize
 
   @doc """
@@ -23,7 +22,6 @@ defmodule Tokenize do
 
   """
   def tokenize_file(path: some_path) do
-    IO.inspect(some_path)
     file_contents = File.read!(some_path)
 
     file_contents

@@ -9,8 +9,8 @@ defmodule CliTest do
     assert parse_args(["--help", "anything"]) == :help
   end
 
-  test "file path is returned if ony arg" do
-    assert parse_args(["some/file"]) == { "some/file" }
+  test "file path is returned if only arg" do
+    assert parse_args(["--path", "some/file"]) == [path: "some/file"]
   end
 end
 
