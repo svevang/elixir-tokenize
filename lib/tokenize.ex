@@ -14,13 +14,6 @@ defmodule Tokenize do
   # When your NIF is loaded, it will override this function.
   def rust_tokenize(_a), do: throw :nif_not_loaded
 
-  @doc """
-  ## Example
-
-      iex> Tokenize.tokenize_file(path: Path.expand('../test/fixtures/test.txt', __DIR__))
-      ["file", "from", "list", "of", "some", "words"]
-
-  """
   def tokenize_file(path: some_path) do
     file_contents = File.read!(some_path)
 
