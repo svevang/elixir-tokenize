@@ -3,6 +3,8 @@
 #[macro_use] extern crate lazy_static;
 
 extern crate natural;
+extern crate pipclient_tokenize;
+
 use natural::tokenize::tokenize;
 
 use rustler::{NifEnv, NifTerm, NifResult, NifEncoder};
@@ -24,7 +26,7 @@ rustler_export_nifs! {
 
 fn rust_tokenize<'a>(env: NifEnv<'a>, args: &[NifTerm<'a>]) -> NifResult<NifTerm<'a>> {
     let incoming_string: String = try!(args[0].decode());
-    let owned_strings = tokenize(&incoming_string).iter().map(|&s| String::from(s) ).collect::<Vec<String>>();
+    let owned_strings = pipclient_tokenize::python_tokenize(&incoming_string).unwrap();
 
     Ok((atoms::ok(), owned_strings).encode(env))
 }
